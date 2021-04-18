@@ -1,0 +1,23 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  color: #666;
+  font-size: 12px;
+}
+
+body .el-popper{
+  padding: 2px;
+  color: #999;
+}
+
+body .el-popper.is-light {
+  border: 1px solid #409eff;
+}
+
+body .el-button--mini {
+  min-height: 22px;
+  padding: 4px 6px;
+}

@@ -1,0 +1,105 @@
+@import './../../assets/css/default.less';
+
+.api_title {
+    position: relative;
+    padding: 4px 0;
+    color: @color_fff;
+    text-align: center;
+    background-color: @color_423f3f;
+
+    .el-icon-delete {
+        cursor: pointer;
+    }
+}
+
+.api_container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.api_item_container {
+    flex-grow: 0;
+    box-sizing: border-box;
+    width: 20%;
+    padding: 5px;
+}
+
+.api_item_body {
+    padding: 4px;
+    border-radius: 4px;
+    box-shadow: 0 0 3px @color_ccc;
+    transition: all .4s;
+}
+
+.api_item_body:hover {
+    box-shadow: 0 0 5px @color_aaa;
+    transform: translateY(-1px);
+}
+
+.plus_item {
+    color: @color_aaa;
+    font-weight: 700;
+    font-size: 13px;
+    text-align: center;
+    border: 3px @color_aaa dashed;
+    cursor: pointer;
+}
+
+.api_item_body_title {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    overflow: hidden;
+    color: @color_default;
+    font-weight: bolder;
+    white-space: nowrap;
+    text-align: center;
+    text-overflow: ellipsis;
+    cursor: pointer;
+}
+
+.plus_custom_btn {
+    position: absolute;
+    top: 2px;
+    right: 0;
+    display: inline-block;
+    box-sizing: border-box;
+    height: 20px;
+    padding: 0 4px;
+    text-align: center;
+    border: 1px solid @color_fff;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.api_item_body_icons {
+    position: absolute;
+    top: -14px;
+    display: flex;
+    justify-content: space-between;
+    width: 92%;
+    opacity: 0;
+    transition: all .4s;
+
+    .el-icon-edit {
+        cursor: pointer;
+        transition: all .4s;
+
+        &:hover {
+            color: @color_aaa;
+        }
+    }
+
+    .el-icon-delete {
+        cursor: pointer;
+        transition: all .4s;
+
+        &:hover {
+            color: @color_aaa;
+        }
+    }
+}
+
+.api_item_body:hover .api_item_body_icons {
+    top: 6px;
+    opacity: 1;
+}

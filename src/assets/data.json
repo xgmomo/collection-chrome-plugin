@@ -1,0 +1,35 @@
+{
+    "innerApis": [
+        {
+            "id": "0001",
+            "name": "伽马",
+            "buildUrl": "http://#2",
+            "betaUrl": "http://#",
+            "devUrl:": "http://#"
+        }
+    ],
+    "outerApis": [
+        {
+            "title": "自定义网址1",
+            "id": "0001",
+            "apis": [
+                {
+                    "id": "0001",
+                    "name": "伽马1",
+                    "url": "http://#"
+                }
+            ]
+        },
+        {
+            "title": "自定义网址2",
+            "id": "0002",
+            "apis": [
+                {
+                    "id": "0001",
+                    "name": "伽马2",
+                    "url": "http://#"
+                }
+            ]
+        }
+    ]
+}
