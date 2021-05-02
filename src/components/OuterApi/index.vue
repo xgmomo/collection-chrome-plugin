@@ -60,8 +60,9 @@
 </template>
 
 <script>
-import { onMounted, reactive, toRefs } from "vue";
+import { toRefs } from "vue";
 import ConfirmModal from "/@/minComponents/ConfirmModal/index.vue";
+import { modalVisible, handleModal } from "/@/minComponents/ConfirmModal/modalVisible";
 
 export default {
   components: {
@@ -70,15 +71,7 @@ export default {
   props: {
     data: Array,
   },
-  setup(props) {
-    // 弹框
-    const modalVisible = reactive({
-      visible: false,
-    });
-    // 弹框显示隐藏
-    const handleModal = (isShow) => {
-      modalVisible.visible = isShow;
-    };
+  setup() {
     // 添加网址模块弹框中
     const addModule = () => {
       handleModal(false);
