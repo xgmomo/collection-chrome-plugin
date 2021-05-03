@@ -5,11 +5,15 @@ const userModule = {
     state: () => {
         return {
             _id: '', // 用户id
+            userName: '', // 用户名
         }
     },
     mutations: {
         setId(state, _id) {
             state._id = _id;
+        },
+        setUserInfo(state, userName) {
+            state.userName = userName;
         }
     },
     actions: {
@@ -22,6 +26,7 @@ const userModule = {
                     _id
                 } = data;
                 commit('setId', _id);
+                commit('setUserInfo', params.userName)
                 return res;
             })
         }

@@ -1,8 +1,8 @@
 <template>
-  <div class="api_title">内部网址</div>
+  <div class="api_title">{{data.name}}</div>
   <div class="api_container">
-    <div class="api_item_container">
-      <div class="api_item_body" v-for="api in data" :key="api.id">
+    <div class="api_item_container" v-for="api in data.apis" :key="api._id">
+      <div class="api_item_body">
         <div class="api_item_body_title">{{ api.name }}</div>
         <div class="api_item_body_icons">
           <i class="el-icon-edit" />
@@ -46,7 +46,7 @@
 import { onMounted } from "vue";
 export default {
   props: {
-    data: Array,
+    data: Object,
   },
   setup(props) {
     onMounted(() => {

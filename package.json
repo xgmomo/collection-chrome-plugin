@@ -2,7 +2,7 @@
   "name": "collection-chrome-plugin",
   "version": "0.0.0",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --open",
     "build": "vite build"
   },
   "dependencies": {

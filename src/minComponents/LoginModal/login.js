@@ -35,6 +35,9 @@ export const login = (userName, password, store) => {
         } = data;
 
         localStorage.collectionChromeToken = token;
+        localStorage.userName = userName;
+
+        store.dispatch("websiteModule/getWebsiteList");
 
         ElMessage.success({
             message,

@@ -74,6 +74,9 @@ class User extends Service {
             _id: user._id,
         };
 
+        await service.website.edit('inner', user._id);
+        await service.website.edit('outer', user._id);
+
         return {
             data,
             status: 200,
@@ -86,7 +89,7 @@ class User extends Service {
         return ctx.app.jwt.sign(
             {
                 data,
-                exp: Math.floor(Date.now() / 1000) + 60 * 60 * 24 * 7
+                exp: Math.floor(Date.now() / 1000) + 360 * 60 * 24 * 7
             },
             ctx.app.config.jwt.secret
         );

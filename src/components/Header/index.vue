@@ -6,7 +6,7 @@
     </div>
     <div class="config_container">
       <el-button
-        v-if="!_id"
+        v-if="!userName"
         size="mini"
         @click="
           () => {
@@ -16,25 +16,32 @@
       >
         登录
       </el-button>
-      <el-button
+      <el-popconfirm
         v-else
-        size="mini"
+        title="确定退出登录吗？"
+        confirmButtonText="确定"
+        cancelButtonText="取消"
+        @confirm="logout"
       >
-        欢迎你
-      </el-button>
+        <template #reference>
+          <el-button size="mini">
+            {{ userName }}
+          </el-button>
+        </template>
+      </el-popconfirm>
     </div>
   </header>
   <LoginModal :handleModal="handleModal" :visible="visible" />
 </template>
 
 <script>
-import { toRefs } from "vue";
-import { useStore } from "vuex";
+import { computed, toRefs } from "vue";
 import {
   modalVisible,
   handleModal,
 } from "/@/minComponents/LoginModal/modalVisible";
 import LoginModal from "/@/minComponents/LoginModal/index.vue";
+import { useStore } from "vuex";
 
 export default {
   components: {
@@ -42,11 +49,21 @@ export default {
   },
   setup() {
     const store = useStore();
-    const userModule = store.state.userModule;
-    
+    const userName = computed(() => {
+      return store.state.userModule.userName;
+    });
+
+    const logout = () => {
+      localStorage.userName = "";
+      localStorage.collectionChromeToken = "";
+      store.commit("userModule/setId", "");
+      store.commit("userModule/setUserInfo", "");
+    };
+
     return {
       handleModal,
-      ...toRefs(userModule),
+      userName,
+      logout,
       ...toRefs(modalVisible),
     };
   },

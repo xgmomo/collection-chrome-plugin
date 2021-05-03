@@ -1,7 +1,7 @@
 <template>
   <Header />
-  <InnerApi :data="dataJson.apis.innerApis" />
-  <OuterApi :data="dataJson.apis.outerApis" />
+  <InnerApi :data="website.inner" />
+  <OuterApi :data="website.outer" />
   <Footer />
 </template>
 
@@ -10,9 +10,8 @@ import Header from "./components/Header/index.vue";
 import InnerApi from "./components/InnerApi/index.vue";
 import OuterApi from "./components/OuterApi/index.vue";
 import Footer from "./components/Footer/index.vue";
-
-import jsonData from "./assets/data.json";
-import { reactive } from "vue";
+import { computed, onMounted } from "vue";
+import { useStore } from "vuex";
 
 export default {
   name: "App",
@@ -23,12 +22,21 @@ export default {
     Footer,
   },
   setup() {
-    const dataJson = reactive({
-      apis: jsonData || {},
+    const store = useStore();
+
+    onMounted(() => {
+      store.commit("userModule/setUserInfo", localStorage.userName);
+      if (localStorage.userName) {
+        store.dispatch("websiteModule/getWebsiteList");
+      }
+    });
+
+    const website = computed(() => {
+      return store.state.websiteModule.data;
     });
 
     return {
-      dataJson,
+      website,
     };
   },
 };
