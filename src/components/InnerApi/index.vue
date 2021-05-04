@@ -1,21 +1,35 @@
 <template>
-  <div class="api_title">{{data.name}}</div>
+  <div class="api_title">{{ data.name }}</div>
   <div class="api_container">
     <div class="api_item_container" v-for="api in data.apis" :key="api._id">
       <div class="api_item_body">
         <div class="api_item_body_title">{{ api.name }}</div>
         <div class="api_item_body_icons">
-          <i class="el-icon-edit" />
-          <i class="el-icon-delete" />
+          <i
+            class="el-icon-edit"
+            @click="
+              () => {
+                editApiHandleModal(true, { ...api, websiteId: data._id });
+              }
+            "
+          />
+          <i class="el-icon-delete" @click="deleteApi(api._id)" />
         </div>
         <div class="api_item_body_apis">
           <el-tooltip
             :visible-arrow="false"
-            :content="api.buildUrl"
+            :content="api.prodUrl"
             placement="bottom"
             effect="light"
           >
-            <a>正式</a>
+            <a
+              @click="
+                () => {
+                  go(api.prodUrl);
+                }
+              "
+              >正式</a
+            >
           </el-tooltip>
           <el-tooltip
             :visible-arrow="false"
@@ -23,35 +37,96 @@
             placement="bottom"
             effect="light"
           >
-            <a>测试</a>
+            <a
+              @click="
+                () => {
+                  go(api.betaUrl);
+                }
+              "
+              >测试</a
+            >
           </el-tooltip>
           <el-tooltip
             :visible-arrow="false"
-            :content="api.devUrl"
+            :content="api.localUrl"
             placement="bottom"
             effect="light"
           >
-            <a>开发</a>
+            <a
+              @click="
+                () => {
+                  go(api.localUrl);
+                }
+              "
+              >开发</a
+            >
           </el-tooltip>
         </div>
       </div>
     </div>
-    <div class="api_item_container plus_item_container">
+    <div
+      class="api_item_container plus_item_container"
+      @click="
+        () => {
+          editApiHandleModal(true, { websiteId: data._id });
+        }
+      "
+    >
       <div class="api_item_body plus_item">+</div>
     </div>
   </div>
+  <InnerApiEditModal
+    :handleModal="editApiHandleModal"
+    :visible="editApiModalVisible"
+    :onOk="editApi"
+  />
 </template>
 
 <script>
-import { onMounted } from "vue";
+import { useStore } from "vuex";
+import InnerApiEditModal from "/@/minComponents/InnerApiEditModal/index.vue";
+import {
+  modalVisible as editApiModalVisible,
+  handleModal as editApiHandleModal,
+} from "/@/minComponents/InnerApiEditModal/modalVisible";
+import {
+  editApi as editApiFunction,
+  deleteApi as deleteApiFunction,
+} from "./editApi";
+
 export default {
   props: {
     data: Object,
   },
-  setup(props) {
-    onMounted(() => {
-    //   console.log(props.data, "1");
-    });
+  components: {
+    InnerApiEditModal,
+  },
+  setup() {
+    const store = useStore();
+    // 跳转页面
+    const go = (url) => {
+      window.open(url);
+    };
+    const get = () => {
+      store.dispatch("websiteModule/getWebsiteList");
+    };
+
+    // 新增修改网址地址
+    const editApi = (formValues) => {
+      editApiFunction(store, formValues, get);
+    };
+    // 删除网址
+    const deleteApi = (_id) => {
+      deleteApiFunction(store, _id, get);
+    };
+
+    return {
+      go,
+      editApiModalVisible,
+      editApiHandleModal,
+      editApi,
+      deleteApi,
+    };
   },
 };
 </script>

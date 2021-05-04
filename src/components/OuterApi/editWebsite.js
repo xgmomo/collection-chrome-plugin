@@ -1,20 +1,8 @@
-import { reactive } from 'vue';
 import { ElMessage } from "element-plus";
-
-export const modalVisible = reactive({
-    visible: false
-});
-
-const websiteId = reactive({
-    _id: ''
-})
-
-export const handleModal = (isShow, id) => {
-    modalVisible.visible = isShow;
-    if (id) {
-        websiteId._id = id;
-    }
-}
+import {
+    websiteId,
+    handleModal,
+} from '/@/minComponents/ChangeWebsiteNameModal/visible';
 
 // 修改名称
 export const changeName = async (store, name) => {

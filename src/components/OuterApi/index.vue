@@ -9,11 +9,11 @@
         class="api_title_span"
         @click="
           () => {
-            changeNameHandleModal(true, dataItem._id);
+            changeNameHandleModal(true, dataItem._id, dataItem.name);
           }
         "
       >
-        {{ dataItem.name }} {{ index + 1 }}
+        {{ dataItem.name }}
       </span>
       <el-popconfirm
         v-if="index > 0"
@@ -49,13 +49,43 @@
         :key="api._id"
       >
         <div class="api_item_body">
-          <div class="api_item_body_title">{{ api.name }}</div>
-          <div class="api_item_body_icons">
-            <i class="el-icon-edit" />
+          <div
+            class="api_item_body_title"
+            @click="
+              () => {
+                go(api.prodUrl);
+              }
+            "
+          >
+            <el-tooltip
+              :visible-arrow="false"
+              :content="api.prodUrl"
+              placement="bottom"
+              effect="light"
+            >
+              <a>{{ api.name }}</a>
+            </el-tooltip>
+          </div>
+          <div class="api_item_body_icons left">
+            <i
+              class="el-icon-edit"
+              @click="
+                () => {
+                  editApiHandleModal(true, { ...api, websiteId: dataItem._id });
+                }
+              "
+            />
+          </div>
+          <div class="api_item_body_icons right">
             <el-popconfirm
               title="是否删除？"
               confirmButtonText="确定"
               cancelButtonText="取消"
+              @confirm="
+                () => {
+                  deleteApi(api._id);
+                }
+              "
             >
               <template #reference>
                 <i class="el-icon-delete" />
@@ -64,7 +94,16 @@
           </div>
         </div>
       </div>
-      <div class="api_item_container plus_item_container">
+      <div
+        class="api_item_container plus_item_container"
+        @click="
+          () => {
+            editApiHandleModal(true, {
+              websiteId: dataItem._id,
+            });
+          }
+        "
+      >
         <div class="api_item_body plus_item">+</div>
       </div>
     </div>
@@ -80,34 +119,53 @@
     :visible="changeNameModalVisible"
     :onOk="changeModuleName"
   />
+  <OuterApiEditModal
+    :handleModal="editApiHandleModal"
+    :visible="editApiModalVisible"
+    :onOk="editApi"
+  />
 </template>
 
 <script>
 import { toRefs } from "vue";
 import { useStore } from "vuex";
 import ConfirmModal from "/@/minComponents/ConfirmModal/index.vue";
-import ChangeWebsiteNameModal from "/@/minComponents/ChangeWebsiteNameModal/index.vue";
 import {
   modalVisible,
   handleModal,
 } from "/@/minComponents/ConfirmModal/modalVisible";
-import { addWebsite, deleteWebsite } from "./addAndDeleteWebsite";
+import ChangeWebsiteNameModal from "/@/minComponents/ChangeWebsiteNameModal/index.vue";
 import {
   modalVisible as changeNameModalVisible,
   handleModal as changeNameHandleModal,
-  changeName,
-} from "./editWebsite";
+} from "/@/minComponents/ChangeWebsiteNameModal/visible";
+import { addWebsite, deleteWebsite } from "./addAndDeleteWebsite";
+import { changeName } from "./editWebsite";
+import OuterApiEditModal from "/@/minComponents/OuterApiEditModal/index.vue";
+import {
+  modalVisible as editApiModalVisible,
+  handleModal as editApiHandleModal,
+} from "/@/minComponents/OuterApiEditModal/modalVisible";
+import {
+  editApi as editApiFunction,
+  deleteApi as deleteApiFunction,
+} from "./editApi";
 
 export default {
   components: {
     ConfirmModal,
     ChangeWebsiteNameModal,
+    OuterApiEditModal,
   },
   props: {
     data: Array,
   },
   setup() {
     const store = useStore();
+    // 跳转页面
+    const go = (prodUrl) => {
+      window.open(prodUrl);
+    };
     const get = () => {
       store.dispatch("websiteModule/getWebsiteList");
     };
@@ -123,14 +181,27 @@ export default {
     const changeModuleName = (name) => {
       changeName(store, name, get);
     };
+    // 新增修改网址地址
+    const editApi = (name, prodUrl) => {
+      editApiFunction(store, name, prodUrl, get);
+    };
+    // 删除网址
+    const deleteApi = (_id) => {
+      deleteApiFunction(store, _id, get);
+    };
 
     return {
+      go,
       handleModal,
       addModule,
       delModule,
       changeNameModalVisible,
       changeNameHandleModal,
       changeModuleName,
+      editApiModalVisible,
+      editApiHandleModal,
+      editApi,
+      deleteApi,
       ...toRefs(modalVisible),
     };
   },

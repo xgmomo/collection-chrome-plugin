@@ -22,7 +22,7 @@ class Website extends Service {
             return {
                 data: website,
                 status: 200,
-                message: "创建成功",
+                message: "请求成功",
             };
         }
         website = await Website.findOneAndUpdate({

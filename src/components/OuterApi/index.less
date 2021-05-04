@@ -28,6 +28,7 @@
 }
 
 .api_item_body {
+    position: relative;
     padding: 4px;
     border-radius: 4px;
     box-shadow: 0 0 3px @color_ccc;
@@ -77,9 +78,6 @@
 .api_item_body_icons {
     position: absolute;
     top: -14px;
-    display: flex;
-    justify-content: space-between;
-    width: 92%;
     opacity: 0;
     transition: all .4s;
 
@@ -100,6 +98,13 @@
             color: @color_aaa;
         }
     }
+}
+.left {
+    left: 2px;
+}
+
+.right {
+    right: 2px;
 }
 
 .api_item_body:hover .api_item_body_icons {

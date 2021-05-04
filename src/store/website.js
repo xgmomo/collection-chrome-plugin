@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const userModule = {
+const websiteModule = {
     namespaced: true,
     state: () => {
         return {
@@ -43,7 +43,6 @@ const userModule = {
                         outer.push(item)
                     }
                 }
-                console.log(outer)
                 commit('setData', { inner, outer });
                 return res;
             })
@@ -63,4 +62,4 @@ const userModule = {
     }
 }
 
-export default userModule
+export default websiteModule

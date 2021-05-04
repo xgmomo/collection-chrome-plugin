@@ -1,6 +1,6 @@
 <template>
   <el-dialog
-    title="修改网站模块名称"
+    title="新增/编辑网址地址"
     v-model="visible.visible"
     width="70%"
     :before-close="
@@ -19,10 +19,31 @@
       label-width="80px"
       class="login-form"
     >
-      <el-form-item label="模块名称" prop="name">
+      <el-form-item label="网址名称" prop="name">
         <el-input
           size="mini"
           v-model="formValues.name"
+          autocomplete="off"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="正式环境" prop="prodUrl">
+        <el-input
+          size="mini"
+          v-model="formValues.prodUrl"
+          autocomplete="off"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="测试环境" prop="betaUrl">
+        <el-input
+          size="mini"
+          v-model="formValues.betaUrl"
+          autocomplete="off"
+        ></el-input>
+      </el-form-item>
+      <el-form-item label="开发环境" prop="localUrl">
+        <el-input
+          size="mini"
+          v-model="formValues.localUrl"
           autocomplete="off"
         ></el-input>
       </el-form-item>
@@ -43,9 +64,15 @@
           type="primary"
           @click="
             () => {
-              onOkState(formValues.name);
+              onOkState({
+                name: formValues.name,
+                prodUrl: formValues.prodUrl,
+                betaUrl: formValues.betaUrl,
+                localUrl: formValues.localUrl,
+              });
             }
           "
+          :loading="loading"
           >确 定</el-button
         >
       </span>
@@ -53,9 +80,10 @@
   </el-dialog>
 </template>
 <script>
-import { ref } from "vue";
-import { rules } from "./form";
-import { websiteId } from "./visible";
+import { computed, ref } from "vue";
+import { rules } from "./form.js";
+import { apiIdObj } from "./modalVisible";
+import { useStore } from "vuex";
 
 export default {
   props: {
@@ -83,35 +111,55 @@ export default {
     return {
       formValues: {
         name: "",
+        prodUrl: "http://#/",
+        betaUrl: "http://#/",
+        localUrl: "http://#/",
       },
     };
   },
   watch: {
     "visible.visible"(val) {
       if (val) {
-        if (websiteId.name) {
-          this.formValues.name = websiteId.name;
+        if (apiIdObj._id) {
+          this.formValues.name = apiIdObj.name;
+          this.formValues.prodUrl = apiIdObj.prodUrl;
+          this.formValues.betaUrl = apiIdObj.betaUrl;
+          this.formValues.localUrl = apiIdObj.localUrl;
         }
+      } else {
+        this.formValues = {
+          name: "",
+          prodUrl: "http://#/",
+          betaUrl: "http://#/",
+          localUrl: "http://#/",
+        };
       }
     },
   },
   setup(props) {
     const { onOk } = props;
+    const store = useStore();
     const formRef = ref();
 
-    const onOkState = (name) => {
+    const onOkState = (formValues) => {
       formRef.value.validate((valid) => {
         if (valid) {
-          onOk(name);
+          onOk(formValues);
         } else {
           return false;
         }
       });
     };
+
+    const loading = computed(() => {
+      return store.state.loading;
+    });
+
     return {
       formRef,
       rules,
       onOkState,
+      loading,
     };
   },
 };
