@@ -32,7 +32,7 @@ export default {
     });
 
     const website = computed(() => {
-      return store.state.websiteModule.data;
+      return store.getters['websiteModule/filterList'];
     });
 
     return {

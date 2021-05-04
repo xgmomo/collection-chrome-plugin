@@ -4,23 +4,46 @@ const websiteModule = {
     namespaced: true,
     state: () => {
         return {
-            data: {
-                inner: {
-                    name: '内部网址',
-                    apis: []
-                },
-                outer: [
-                    {
-                        name: '自定义网址',
-                        apis: []
-                    }
-                ]
-            }, // 网址导航数据
+            list: [], // 原始数据
+            // data: {
+            //     inner: {
+            //         name: '内部网址',
+            //         apis: []
+            //     },
+            //     outer: [
+            //         {
+            //             name: '自定义网址',
+            //             apis: []
+            //         }
+            //     ]
+            // }, // 网址导航数据 示例
         }
     },
     mutations: {
         setData(state, data) {
-            state.data = data;
+            state.list = data;
+        }
+    },
+    getters: {
+        filterList: state => {
+            let inner = {};
+            let outer = [];
+            for (let i = 0; i < state.list.length; i++) {
+                const item = state.list[i];
+                if (!item.apis) {
+                    item.apis = []
+                }
+                if (item.type === 'inner') {
+                    inner = item;
+                } else {
+                    outer.push(item)
+                }
+            }
+            console.log(inner,'inner')
+            return {
+                inner,
+                outer,
+            }
         }
     },
     actions: {
@@ -30,20 +53,8 @@ const websiteModule = {
                     data = []
                 } = res;
 
-                let inner = {};
-                let outer = [];
-                for (let i = 0; i < data.length; i++) {
-                    const item = data[i];
-                    if (!item.apis) {
-                        item.apis = []
-                    }
-                    if (item.type === 'inner') {
-                        inner = item;
-                    } else {
-                        outer.push(item)
-                    }
-                }
-                commit('setData', { inner, outer });
+
+                commit('setData', data);
                 return res;
             })
         },
