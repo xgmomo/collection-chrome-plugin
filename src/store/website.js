@@ -39,7 +39,7 @@ const websiteModule = {
                     outer.push(item)
                 }
             }
-            console.log(inner,'inner')
+            
             return {
                 inner,
                 outer,
