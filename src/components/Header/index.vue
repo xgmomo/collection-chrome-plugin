@@ -58,6 +58,7 @@ export default {
       localStorage.collectionChromeToken = "";
       store.commit("userModule/setId", "");
       store.commit("userModule/setUserInfo", "");
+      store.commit("websiteModule/setData", []);
     };
 
     return {

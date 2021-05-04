@@ -1,5 +1,6 @@
 import { reactive } from 'vue';
 import { ElMessage } from 'element-plus'
+import axios from 'axios';
 
 export const checkUserName = (rule, value, callback) => {
     if (!value) {
@@ -36,7 +37,7 @@ export const login = (userName, password, store) => {
 
         localStorage.collectionChromeToken = token;
         localStorage.userName = userName;
-
+        axios.defaults.headers['x-auth-token'] = localStorage.collectionChromeToken || '';
         store.dispatch("websiteModule/getWebsiteList");
 
         ElMessage.success({

@@ -8,7 +8,9 @@ export default {};
 <style lang="less" scoped>
 @import "./../../assets/css/default.less";
 .footer {
-  margin-top: 20px;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   padding: 6px 0;
   color: @color_fff;
   text-align: center;

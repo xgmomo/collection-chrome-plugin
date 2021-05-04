@@ -1,9 +1,12 @@
 body {
+  min-width: 390px;
   margin: 0;
   padding: 0;
 }
 
 #app {
+  position: relative;
+  min-height: 400px;
   color: #666;
   font-size: 12px;
 }
@@ -39,4 +42,23 @@ body .el-message{
   min-width: 100px;
   padding: 5px 10px;
   opacity: .9;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 6px;
+  background-color: #f6f6f6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0,0,0,.2);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #f5f5f5;
+}
+
+.marginBottom{
+  padding-bottom: 30px;
 }

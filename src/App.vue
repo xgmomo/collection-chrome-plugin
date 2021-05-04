@@ -1,7 +1,9 @@
 <template>
   <Header />
-  <InnerApi :data="website.inner" />
-  <OuterApi :data="website.outer" />
+  <div class="marginBottom">
+    <InnerApi :data="website.inner" />
+    <OuterApi :data="website.outer" />
+  </div>
   <Footer />
 </template>
 
@@ -32,7 +34,7 @@ export default {
     });
 
     const website = computed(() => {
-      return store.getters['websiteModule/filterList'];
+      return store.getters["websiteModule/filterList"];
     });
 
     return {
