@@ -23,11 +23,7 @@
             effect="light"
           >
             <a
-              @click="
-                () => {
-                  go(api.prodUrl);
-                }
-              "
+              :href="api.prodUrl"
               >正式</a
             >
           </el-tooltip>
@@ -38,11 +34,7 @@
             effect="light"
           >
             <a
-              @click="
-                () => {
-                  go(api.betaUrl);
-                }
-              "
+              :href="api.betaUrl"
               >测试</a
             >
           </el-tooltip>
@@ -53,11 +45,7 @@
             effect="light"
           >
             <a
-              @click="
-                () => {
-                  go(api.localUrl);
-                }
-              "
+              :href="api.localUrl"
               >开发</a
             >
           </el-tooltip>
@@ -103,10 +91,6 @@ export default {
   },
   setup() {
     const store = useStore();
-    // 跳转页面
-    const go = (url) => {
-      window.open(url);
-    };
     const get = () => {
       store.dispatch("websiteModule/getWebsiteList");
     };
@@ -121,7 +105,6 @@ export default {
     };
 
     return {
-      go,
       editApiModalVisible,
       editApiHandleModal,
       editApi,

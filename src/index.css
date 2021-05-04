@@ -44,6 +44,11 @@ body .el-message{
   opacity: .9;
 }
 
+a {
+  color:unset;
+  text-decoration:none;
+}
+
 ::-webkit-scrollbar {
   width: 8px;
   height: 6px;

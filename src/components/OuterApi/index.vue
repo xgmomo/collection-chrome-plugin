@@ -51,11 +51,6 @@
         <div class="api_item_body">
           <div
             class="api_item_body_title"
-            @click="
-              () => {
-                go(api.prodUrl);
-              }
-            "
           >
             <el-tooltip
               :visible-arrow="false"
@@ -63,7 +58,7 @@
               placement="bottom"
               effect="light"
             >
-              <a>{{ api.name }}</a>
+              <a :href="api.prodUrl">{{ api.name }}</a>
             </el-tooltip>
           </div>
           <div class="api_item_body_icons left">
@@ -162,10 +157,6 @@ export default {
   },
   setup() {
     const store = useStore();
-    // 跳转页面
-    const go = (prodUrl) => {
-      window.open(prodUrl);
-    };
     const get = () => {
       store.dispatch("websiteModule/getWebsiteList");
     };
@@ -191,7 +182,6 @@ export default {
     };
 
     return {
-      go,
       handleModal,
       addModule,
       delModule,
