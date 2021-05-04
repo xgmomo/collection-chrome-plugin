@@ -13,7 +13,20 @@
               }
             "
           />
-          <i class="el-icon-delete" @click="deleteApi(api._id)" />
+          <el-popconfirm
+              title="是否删除？"
+              confirmButtonText="确定"
+              cancelButtonText="取消"
+              @confirm="
+                () => {
+                  deleteApi(api._id);
+                }
+              "
+            >
+              <template #reference>
+                <i class="el-icon-delete" />
+              </template>
+            </el-popconfirm>
         </div>
         <div class="api_item_body_apis">
           <el-tooltip
