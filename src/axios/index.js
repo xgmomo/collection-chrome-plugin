@@ -12,6 +12,7 @@ const setAxios = () => {
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     axios.defaults.headers['x-auth-token'] = window.localStorage.collectionChromeToken || '';
     axios.defaults.timeout = 20000;
+    
 
     // 设置请求拦截器
     axios.interceptors.request.use(

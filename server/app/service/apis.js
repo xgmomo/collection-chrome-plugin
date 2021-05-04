@@ -14,14 +14,20 @@ class Apis extends Service {
                 _id
             }, condition)
         } else {
-            let apis = await this.getApis({
-                websiteId: condition.websiteId
-            });
-            let length = 0 
-            if(apis){
+            let length = 0
+            let apis = [];
+            if (condition.index) {
+                apis = await this.getApis({
+                    index: condition.index
+                });
+            } else {
+                apis = await this.getApis({
+                    websiteId: condition.websiteId
+                });
+            }
+            if (apis) {
                 length = apis.length;
             }
-
             apiData = await Apis.create({
                 ...condition,
                 index: length

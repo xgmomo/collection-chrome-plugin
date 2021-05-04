@@ -24,6 +24,7 @@ class ApisController extends Controller {
             websiteId,
             apiId,
             name,
+            index,
         } = body;
 
         const condition = {
@@ -31,6 +32,9 @@ class ApisController extends Controller {
             prodUrl,
             websiteId,
             name,
+        }
+        if(index) {
+            condition.index
         }
 
         let finalData;

@@ -18,6 +18,15 @@ class Website extends Service {
             } else {
                 condition.name = '自定义网址';
             }
+
+            let { data } = await this.get({
+                userId
+            });
+            let length = 0
+            if (data) {
+                length = data.length;
+            }
+            condition.index = length;
             website = await Website.create(condition);
             return {
                 data: website,

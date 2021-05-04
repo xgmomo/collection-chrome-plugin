@@ -36,6 +36,7 @@
 
 <script>
 import { computed, toRefs } from "vue";
+import axios from 'axios';
 import {
   modalVisible,
   handleModal,
@@ -56,6 +57,7 @@ export default {
     const logout = () => {
       localStorage.userName = "";
       localStorage.collectionChromeToken = "";
+      axios.defaults.headers['x-auth-token'] = localStorage.collectionChromeToken || '';
       store.commit("userModule/setId", "");
       store.commit("userModule/setUserInfo", "");
       store.commit("websiteModule/setData", []);

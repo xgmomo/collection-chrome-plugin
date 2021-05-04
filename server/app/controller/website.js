@@ -21,11 +21,11 @@ class WebsiteController extends Controller {
         const {
             type = 'outer',
             name,
-            _id: websiteId
+            _id: websiteId,
         } = body;
 
         const { data, status, message } = await website.edit(type, _id, websiteId, {
-            name
+            name,
         });
 
         this.success({
