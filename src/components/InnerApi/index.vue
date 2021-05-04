@@ -37,6 +37,7 @@
           >
             <a
               :href="api.prodUrl"
+              target="_blank"
               >正式</a
             >
           </el-tooltip>
@@ -48,6 +49,7 @@
           >
             <a
               :href="api.betaUrl"
+              target="_blank"
               >测试</a
             >
           </el-tooltip>
@@ -59,6 +61,7 @@
           >
             <a
               :href="api.localUrl"
+              target="_blank"
               >开发</a
             >
           </el-tooltip>

@@ -58,7 +58,7 @@
               placement="bottom"
               effect="light"
             >
-              <a :href="api.prodUrl">{{ api.name }}</a>
+              <a target="_blank" :href="api.prodUrl">{{ api.name }}</a>
             </el-tooltip>
           </div>
           <div class="api_item_body_icons left">

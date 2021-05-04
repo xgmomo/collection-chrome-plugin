@@ -1,6 +1,6 @@
 <template>
   <footer class="footer">
-    <a href="https://github.com/zhuyuyi/collection-chrome-plugin">chrome plugin（fork to github）</a>
+    <a target="_blank" href="https://github.com/zhuyuyi/collection-chrome-plugin">chrome plugin（fork to github）</a>
   </footer>
 </template>
 
