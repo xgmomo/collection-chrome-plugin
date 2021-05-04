@@ -1,5 +1,7 @@
 <template>
-  <footer class="footer">chrome小插件--收藏夹（zyy）</footer>
+  <footer class="footer">
+    <a href="https://github.com/zhuyuyi/collection-chrome-plugin">chrome小插件--收藏夹（to github）</a>
+  </footer>
 </template>
 
 <script>
