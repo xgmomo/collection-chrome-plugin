@@ -5,7 +5,12 @@ const Service = require("egg").Service;
 class Apis extends Service {
     // 新增和编辑
     async editApi(condition, _id) {
-        const { ctx } = this;
+        const {
+            ctx,
+            service: {
+                website,
+            },
+        } = this;
         const Apis = ctx.model.Apis;
         let apiData;
 
@@ -17,10 +22,19 @@ class Apis extends Service {
             let length = 0
             let apis = [];
             if (condition.index) {
-                apis = await this.getApis({
+                // 这里表示右键收藏
+                let { data: _website } = website.get({
+                    userId: condition.userId,
                     index: condition.index
-                });
+                })
+
+                if(_website && _website.length > 0){
+                    apis = await this.getApis({
+                        websiteId: _website[0]._id
+                    });
+                }
             } else {
+                // 这里是手动新增
                 apis = await this.getApis({
                     websiteId: condition.websiteId
                 });
