@@ -33,8 +33,8 @@ class ApisController extends Controller {
             websiteId,
             name,
         }
-        if(index) {
-            condition.index
+        if(Number(index) === 1) {
+            condition.index = Number(index)
         }
 
         let finalData;

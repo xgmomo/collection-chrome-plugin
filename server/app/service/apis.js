@@ -1,6 +1,7 @@
 "use strict";
 
 const Service = require("egg").Service;
+const mongoose = require("mongoose");
 
 class Apis extends Service {
     // 新增和编辑
@@ -23,29 +24,38 @@ class Apis extends Service {
             let apis = [];
             if (condition.index) {
                 // 这里表示右键收藏
-                let { data: _website } = website.get({
+                let obj = await website.get({
                     userId: condition.userId,
                     index: condition.index
                 })
-
-                if(_website && _website.length > 0){
+                let _website = obj.data
+                if (_website && _website.length > 0) {
                     apis = await this.getApis({
                         websiteId: _website[0]._id
                     });
+                    if (apis) {
+                        length = apis.length;
+                    }
+                    console.log(_website[0]._id, '_website[0]._id')
+                    apiData = await Apis.create({
+                        ...condition,
+                        websiteId: _website[0]._id,
+                        index: length
+                    })
                 }
             } else {
                 // 这里是手动新增
                 apis = await this.getApis({
                     websiteId: condition.websiteId
                 });
+                if (apis) {
+                    length = apis.length;
+                }
+                apiData = await Apis.create({
+                    ...condition,
+                    index: length
+                })
             }
-            if (apis) {
-                length = apis.length;
-            }
-            apiData = await Apis.create({
-                ...condition,
-                index: length
-            })
         }
 
         return {

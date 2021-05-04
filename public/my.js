@@ -1,4 +1,6 @@
 let default_url = 'http://www.zhuyuyi.cn:7001/api' // : 'http://localhost:7001/api'
+// let default_url = 'http://localhost:7001/api' // : 'http://localhost:7001/api'
+
 axios.defaults.baseURL = default_url;
 axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 axios.defaults.timeout = 20000;
@@ -30,11 +32,13 @@ function save(params, api) {
         };
         axios.post('/apis/editApi', apiObj, {
             headers: {
-                'x-access-token': localStorage.collectionChromeToken
+                'x-auth-token': localStorage.collectionChromeToken
             }
         }).then((response) => {
+            alert('收藏成功')
             console.log(response);
         }).catch((err) => {
+            alert('收藏报错')
             console.log(err)
         })
     } else {
