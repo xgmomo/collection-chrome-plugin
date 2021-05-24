@@ -40,6 +40,18 @@ module.exports = appInfo => {
 
   momentZHFuc.setZH(); // 设置moment中文
 
+  // socket.io
+  config.io = {
+    init: {
+    }, // passed to engine.io
+    namespace: {
+      '/': {
+        connectionMiddleware: [],
+        packetMiddleware: [],
+      },
+    },
+  }
+
   return {
     ...config,
   };

@@ -25,3 +25,9 @@ exports.routerPlus = {
   enable: true,
   package: "egg-router-plus",
 };
+
+exports.io = {
+  enable: true,
+  package: 'egg-socket.io',
+};
+
