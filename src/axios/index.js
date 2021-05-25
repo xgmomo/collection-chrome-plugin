@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus';
 const ENV = import.meta.env.VITE_APP_ENV;
 
 const setAxios = () => {
-    const default_url = ENV === 'production' ? 'http://www.zhuyuyi.cn:7001/api' : 'http://localhost:7001/api'
+    const default_url = ENV === 'production' ? 'http://www.zhuyuyi.cn:7000/api' : 'http://localhost:7001/api'
 
     // 对axios进行二次封装
     // 设置默认URL
