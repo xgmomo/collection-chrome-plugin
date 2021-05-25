@@ -1,4 +1,4 @@
-let default_url = 'http://www.zhuyuyi.cn:7001/api' // : 'http://localhost:7001/api'
+let default_url = 'http://www.zhuyuyi.cn:7000/api' // : 'http://localhost:7001/api'
 // let default_url = 'http://localhost:7001/api' // : 'http://localhost:7001/api'
 
 axios.defaults.baseURL = default_url;
