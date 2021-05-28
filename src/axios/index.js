@@ -12,7 +12,7 @@ const setAxios = () => {
     axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
     axios.defaults.headers['x-auth-token'] = window.localStorage.collectionChromeToken || '';
     axios.defaults.timeout = 20000;
-    
+
 
     // 设置请求拦截器
     axios.interceptors.request.use(
@@ -46,17 +46,21 @@ const setAxios = () => {
                         message: response_data.message,
                         type: 'error',
                     });
-                    return Promise.reject(response_data.message);
+
+                    return Promise.reject(response_data);
                 }
             } else {
                 return response_data;
             }
         },
         error => {
+            console.log(error.status)
             ElMessage({
                 message: error.message,
                 type: 'error'
             });
+            localStorage.collectionChromeToken = '';
+            localStorage.userName = '';
             return Promise.reject(error);
         }
     );

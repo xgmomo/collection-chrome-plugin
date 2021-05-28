@@ -33,7 +33,7 @@ class ApisController extends Controller {
             websiteId,
             name,
         }
-        if(Number(index) === 1) {
+        if (Number(index) === 1) {
             condition.index = Number(index)
         }
 
@@ -76,13 +76,34 @@ class ApisController extends Controller {
         } = ctx;
 
         const {
-            apiId
+            apiId,
+            websiteId,
         } = body;
 
         const { data, status, message } = await apis.deleteApi(apiId);
+        let list = await apis.getApis({
+            websiteId
+        })
+        try {
+            if (list && list.length > 0) {
+                for (let i = 0; i < list.length; i++) {
+                    await apis.updateIndex({
+                        _id: list[i]._id
+                    }, {
+                        index: i
+                    })
+                }
+            }
+        } catch (err) {
+            console.log(err)
+            this.error({
+                status: 500,
+                message: '添加索引出错'
+            })
+        }
 
         this.success({
-            data, 
+            data,
             status,
             message
         })

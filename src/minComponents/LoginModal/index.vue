@@ -22,7 +22,7 @@
       <el-form-item label="用户名" prop="userName">
         <el-input
           size="mini"
-          v-model="formValues.userName"
+          v-model.trim="formValues.userName"
           autocomplete="off"
         ></el-input>
       </el-form-item>
@@ -30,7 +30,7 @@
         <el-input
           size="mini"
           type="password"
-          v-model="formValues.password"
+          v-model.trim="formValues.password"
           autocomplete="off"
         ></el-input>
       </el-form-item>
@@ -63,6 +63,7 @@
 <script>
 import { rules, login } from "./login";
 import { useStore } from "vuex";
+import { ElMessage } from 'element-plus'
 
 export default {
   props: {
@@ -98,6 +99,13 @@ export default {
     const store = useStore();
 
     const onOk = (userName, password) => {
+      if (!userName || !password) {
+        ElMessage({
+            message:'用户名或密码必填',
+            type: 'error'
+        });
+        return;
+      }
       login(userName, password, store);
       meHandleModal(false);
     };

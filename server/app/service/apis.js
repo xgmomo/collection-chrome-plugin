@@ -64,6 +64,15 @@ class Apis extends Service {
             message: '操作成功'
         }
     }
+    // 更新序列
+    async updateIndex(condition, needChange) {
+        const {
+            ctx,
+        } = this;
+        const Apis = ctx.model.Apis;
+        let apiData = await Apis.findByIdAndUpdate(condition, needChange)
+        return apiData;
+    }
     // 删除一个网址
     async deleteApi(_id) {
         const { ctx } = this;

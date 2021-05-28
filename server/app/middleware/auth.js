@@ -33,12 +33,18 @@ module.exports = () => {
             }
             // console.log("---token verify--->", data);
         } catch (err) {
-            ctx.logger.info(
-                'token verify Error 111111111111111111111111',
-                err.message
-            );
-            ctx.helper.ctxJSON({ ctx, status: 500 })
-            ctx.logger.info('token verify Error', err.message);
+            const {
+                message = '',
+                name = ''
+            } = err;
+
+            console.log(message,name,'1111111111111')
+            if(name === 'JsonWebTokenError' || name === 'TokenExpiredError'){
+                ctx.helper.ctxJSON({ ctx, status: 401 })
+            } else {
+                ctx.helper.ctxJSON({ ctx, status: 500 });
+            }
+            ctx.logger.info('system verify Error', message);
             // ctx.helper.ctxJSON({ctx, status: 500});
         }
     };

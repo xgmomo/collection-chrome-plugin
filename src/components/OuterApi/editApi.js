@@ -27,10 +27,11 @@ export const editApi = async (store, name, prodUrl, get) => {
     await get();
 }
 
-export const deleteApi = async (store, _id, get) => {
+export const deleteApi = async (store, _id, get, others) => {
     const deleteApiAxios = () => {
         return store.dispatch('apisModule/deleteApi', {
-            apiId: _id
+            apiId: _id,
+            websiteId: others.websiteId,
         });
     }
     let res = await deleteApiAxios();
