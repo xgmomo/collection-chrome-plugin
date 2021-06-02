@@ -127,7 +127,6 @@ export default {
           this.formValues.localUrl = apiIdObj.localUrl;
         }
       } else {
-        console.log(this.refs.formRef,'this.formRef')
         this.formValues = {
           name: "",
           prodUrl: "http://#/",

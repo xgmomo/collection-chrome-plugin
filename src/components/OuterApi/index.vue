@@ -120,9 +120,8 @@
 </template>
 
 <script>
-import { onMounted, toRefs } from "vue";
+import { toRefs } from "vue";
 import { useStore } from "vuex";
-import dragula from "dragula";
 import ConfirmModal from "/@/minComponents/ConfirmModal/index.vue";
 import {
   modalVisible,
@@ -179,30 +178,6 @@ export default {
     const deleteApi = (_id, others) => {
       deleteApiFunction(store, _id, get, others);
     };
-
-    onMounted(() => {
-      dragula(document.querySelector("#outer_api_container_box"), {
-        isContainer: function (el) {
-          return false; // 点击和拖动都会触发，drake.containers元素将被考虑
-        },
-        moves: function (el, source, handle, sibling) {
-          return true; // 一直能拖动，拖动时触发
-        },
-        accepts: function (el, target, source, sibling) {
-          return true; // 元素可以放在任何`container`中
-        },
-        invalid: function (el, handle) {
-          return false; // 默认情况下不会阻止任何拖动
-        },
-        direction: "vertical", //元素的排放方向
-        copy: false, // 拖动的元素是否为副本
-        copySortSource: false, // 复制的源容器重新排序
-        revertOnSpill: false, // 是否将拖到容器外的元素放回原处
-        removeOnSpill: false, // 是否将拖到容器外的元素删除
-        mirrorContainer: document.body, // 设置获取附加镜像元素的元素
-        ignoreInputTextSelection: true, //允许用户选择输入文本
-      });
-    });
 
     return {
       handleModal,
