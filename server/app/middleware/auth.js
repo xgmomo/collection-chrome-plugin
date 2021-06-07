@@ -21,7 +21,7 @@ module.exports = () => {
                 const { data, exp } = await jwt.verify(token, config.jwt.secret);
                 if (data) {
                     // console.log('data', data)
-                    if (exp * 1000 - helper.nowTimestamp() > 0) {
+                    if (exp * 10000000 - helper.nowTimestamp() > 0) {
                         ctx.user = data;
                         await next();
                     } else {
