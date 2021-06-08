@@ -2,6 +2,7 @@
   <div class="api_title">{{ data.name }}</div>
   <div class="api_container">
     <div class="api_item_container" v-for="api in data.apis" :key="api._id">
+      <el-dropdown trigger="contextmenu">
       <div class="api_item_body">
         <div class="api_item_body_title">{{ api.name }}</div>
         <div class="api_item_body_icons">
@@ -67,6 +68,17 @@
           </el-tooltip>
         </div>
       </div>
+      <template #dropdown>
+        <el-dropdown-menu>
+          <el-dropdown-item icon="el-icon-plus">黄金糕</el-dropdown-item>
+          <el-dropdown-item icon="el-icon-circle-plus">狮子头</el-dropdown-item>
+          <el-dropdown-item icon="el-icon-circle-plus-outline">螺蛳粉</el-dropdown-item>
+          <el-dropdown-item icon="el-icon-check">双皮奶</el-dropdown-item>
+          <el-dropdown-item icon="el-icon-circle-check">蚵仔煎</el-dropdown-item>
+        </el-dropdown-menu>
+      </template>
+    </el-dropdown>
+      
     </div>
     <div
       class="api_item_container plus_item_container"
