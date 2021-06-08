@@ -18,7 +18,7 @@ server为服务端代码
 
 1、先你得先安装mongodb（可以自行考虑安装可视化插件）
 2、在项目根目录下yarn install 并在 server 目录下yarn install
-3、启动前端yarn dev 启动后端（cd server） yarn dev
+3、启动前端yarn dev  切到（http://localhost:3001/main.html url下） 启动后端（cd server） yarn dev
 4、server内容需部署到服务器上
 5、前端项目 yarn build 即可
 

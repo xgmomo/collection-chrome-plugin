@@ -30,6 +30,7 @@ export default (_) =>
       vue(),
     ],
     server: {
+      port: 3001,
       proxy: {
         "/api": {
           target: "",

@@ -1,26 +1,7 @@
-let default_url = 'http://www.zhuyuyi.cn:7001/api' // : 'http://localhost:7001/api'
-// let default_url = 'http://localhost:7001/api' // : 'http://localhost:7001/api'
+import axios from 'axios';
+import setAxios from '@/pages/main/axios';
 
-axios.defaults.baseURL = default_url;
-axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
-axios.defaults.timeout = 20000;
-
-// 设置请求拦截器
-axios.interceptors.request.use(
-    config => {
-        config.transformRequest = [function (data) {
-            let ret = ''
-            for (let it in data) {
-                ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&'
-            }
-            return ret
-        }]
-        return config;
-    },
-    error => {
-        return Promise.reject(error);
-    }
-);
+setAxios();
 
 function save(params, api) {
     if (localStorage.collectionChromeToken) {
