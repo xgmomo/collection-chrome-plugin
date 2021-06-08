@@ -1,8 +1,8 @@
 import { ElMessage } from "element-plus";
-import { apiIdObj } from '/@/minComponents/OuterApiEditModal/modalVisible';
+import { apiIdObj } from '@/pages/main/minComponents/OuterApiEditModal/modalVisible';
 import {
     handleModal,
-} from "/@/minComponents/OuterApiEditModal/modalVisible";
+} from "@/pages/main/minComponents/OuterApiEditModal/modalVisible";
 
 export const editApi = async (store, name, prodUrl, get) => {
     const condition = {

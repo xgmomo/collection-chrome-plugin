@@ -40,8 +40,8 @@ import axios from 'axios';
 import {
   modalVisible,
   handleModal,
-} from "/@/minComponents/LoginModal/modalVisible";
-import LoginModal from "/@/minComponents/LoginModal/index.vue";
+} from "@/pages/main/minComponents/LoginModal/modalVisible";
+import LoginModal from "@/pages/main/minComponents/LoginModal/index.vue";
 import { useStore } from "vuex";
 
 export default {
