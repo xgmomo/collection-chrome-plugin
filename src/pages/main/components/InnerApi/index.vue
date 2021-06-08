@@ -100,11 +100,12 @@
 
 <script>
 import { useStore } from "vuex";
-import InnerApiEditModal from "/@/minComponents/InnerApiEditModal/index.vue";
+import { ElMessage } from 'element-plus';
+import InnerApiEditModal from "@/pages/main/minComponents/InnerApiEditModal/index.vue";
 import {
   modalVisible as editApiModalVisible,
   handleModal as editApiHandleModal,
-} from "/@/minComponents/InnerApiEditModal/modalVisible";
+} from "@/pages/main/minComponents/InnerApiEditModal/modalVisible";
 import {
   editApi as editApiFunction,
   deleteApi as deleteApiFunction,
@@ -125,6 +126,13 @@ export default {
 
     // 新增修改网址地址
     const editApi = (formValues) => {
+      if(!localStorage.collectionChromeToken){
+        ElMessage({
+            message:'请先登录哟',
+            type: 'error'
+        });
+        return;
+      }
       editApiFunction(store, formValues, get);
     };
     // 删除网址

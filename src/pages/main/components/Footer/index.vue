@@ -8,7 +8,7 @@
 export default {};
 </script>
 <style lang="less" scoped>
-@import "./../../assets/css/default.less";
+@import "@/pages/main/assets/css/default.less";
 .footer {
   position: absolute;
   bottom: 0;

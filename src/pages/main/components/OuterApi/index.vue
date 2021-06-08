@@ -122,23 +122,23 @@
 <script>
 import { toRefs } from "vue";
 import { useStore } from "vuex";
-import ConfirmModal from "/@/minComponents/ConfirmModal/index.vue";
+import ConfirmModal from "@/pages/main/minComponents/ConfirmModal/index.vue";
 import {
   modalVisible,
   handleModal,
-} from "/@/minComponents/ConfirmModal/modalVisible";
-import ChangeWebsiteNameModal from "/@/minComponents/ChangeWebsiteNameModal/index.vue";
+} from "@/pages/main/minComponents/ConfirmModal/modalVisible";
+import ChangeWebsiteNameModal from "@/pages/main/minComponents/ChangeWebsiteNameModal/index.vue";
 import {
   modalVisible as changeNameModalVisible,
   handleModal as changeNameHandleModal,
-} from "/@/minComponents/ChangeWebsiteNameModal/visible";
+} from "@/pages/main/minComponents/ChangeWebsiteNameModal/visible";
 import { addWebsite, deleteWebsite } from "./addAndDeleteWebsite";
 import { changeName } from "./editWebsite";
-import OuterApiEditModal from "/@/minComponents/OuterApiEditModal/index.vue";
+import OuterApiEditModal from "@/pages/main/minComponents/OuterApiEditModal/index.vue";
 import {
   modalVisible as editApiModalVisible,
   handleModal as editApiHandleModal,
-} from "/@/minComponents/OuterApiEditModal/modalVisible";
+} from "@/pages/main/minComponents/OuterApiEditModal/modalVisible";
 import {
   editApi as editApiFunction,
   deleteApi as deleteApiFunction,

@@ -2,7 +2,7 @@ import { ElMessage } from "element-plus";
 import {
     websiteId,
     handleModal,
-} from '/@/minComponents/ChangeWebsiteNameModal/visible';
+} from '@/pages/main/minComponents/ChangeWebsiteNameModal/visible';
 
 // 修改名称
 export const changeName = async (store, name) => {
