@@ -1,17 +1,41 @@
-const { resolve } = require('path');
-import vue from '@vitejs/plugin-vue'
+import { resolve } from "path";
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
 
-export default {
-    plugins: [vue()],
-    alias: {
-        "/@/": resolve(__dirname, "src"),
+export default (_) =>
+  defineConfig({
+    open: false,
+    base: "./",
+    build: {
+      assetsInlineLimit: "1000000", // 不让woff字体类文件单独打出来
+      chunkSizeWarningLimit:'1000', // 设置单文件 超过1M警告
+      rollupOptions: { // 多页面打包配置
+        input: {
+          background: "background.html",
+          main: "main.html",
+        },
+        output: { // 输入的文件格式
+          assetFileNames: "static/css/[name].css",
+          chunkFileNames: "static/js/[name].js",
+          entryFileNames: "static/js/[name].js",
+        },
+      },
     },
-    base: './', // 生产环境下的公共路径 http://www.zhuyuyi.cn:7001/api/
-    proxy: { // 本地开发环境通过代理实现跨域，生产环境使用 nginx 转发
-        '/api': {
-            target: 'http://127.0.0.1:5001', // 后端服务实际地址
-            changeOrigin: true,
-            rewrite: path => path.replace(/^\/api/, '')
-        }
-    }
-}
+    resolve: { 
+      alias: { // alias
+        "@": resolve(__dirname, "src"),
+      },
+    },
+    plugins: [
+      vue(),
+    ],
+    server: {
+      proxy: {
+        "/api": {
+          target: "",
+          changeOrigin: true,
+          // rewrite: path => path.replace(/^\/api/, '')
+        },
+      },
+    },
+  });

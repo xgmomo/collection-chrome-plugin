@@ -88,11 +88,11 @@
 
 <script>
 import { useStore } from "vuex";
-import InnerApiEditModal from "/@/minComponents/InnerApiEditModal/index.vue";
+import InnerApiEditModal from "@/pages/main/minComponents/InnerApiEditModal/index.vue";
 import {
   modalVisible as editApiModalVisible,
   handleModal as editApiHandleModal,
-} from "/@/minComponents/InnerApiEditModal/modalVisible";
+} from "@/pages/main/minComponents/InnerApiEditModal/modalVisible";
 import {
   editApi as editApiFunction,
   deleteApi as deleteApiFunction,

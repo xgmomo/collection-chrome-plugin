@@ -2,7 +2,7 @@ import { ElMessage } from "element-plus";
 import {
     apiIdObj,
     handleModal,
-} from "/@/minComponents/InnerApiEditModal/modalVisible";
+} from "@/pages/main/minComponents/InnerApiEditModal/modalVisible";
 
 export const editApi = async (store, formValues, get) => {
     const {
